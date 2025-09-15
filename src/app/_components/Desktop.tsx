@@ -1,27 +1,22 @@
 "use client";
+import { projects } from "@/content/projects";
+import { useUI } from "@/store/ui";
+import About from "./About";
 import AppWindow from "./AppWindow";
 import Dock from "./Dock";
 import TerminalPane from "./Terminal";
-import { useUI } from "@/store/ui";
-import dynamic from "next/dynamic";
-import { projects } from "@/content/projects";
-
-const AboutMDX = dynamic(
-	() => import("@/content/about.mdx").then((m) => ({ default: m.default })),
-	{ ssr: false }
-);
 
 export default function Desktop() {
 	const wins = useUI((s) => s.wins);
 	return (
-		<div className="relative h-dvh w-screen bg-gradient-to-br from-slate-900 via-slate-950 to-black">
+		<div className="relative h-dvh w-screen ">
 			{/* Wallpaper/branding */}
 			<div className="pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(60%_50%_at_50%_30%,#000_20%,transparent_60%)]" />
 
 			{/* Windows */}
 			<AppWindow id="about" title="About Me">
 				<div className="prose prose-invert max-w-none">
-					<AboutMDX />
+					<About />
 				</div>
 			</AppWindow>
 

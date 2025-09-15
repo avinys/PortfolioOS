@@ -16,7 +16,7 @@ export default function Dock() {
 	const { open, toggleLite, lite } = useUI();
 	const { theme, setTheme } = useTheme();
 	return (
-		<div className="pointer-events-auto fixed bottom-4 left-1/2 z-[999] -translate-x-1/2 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 backdrop-blur">
+		<div className=" w-screen justify-center fixed bottom-[-8px] left-1/2 z-50 -translate-x-1/2 border border-white bg-gray-200 px-3 py-2 pb-4 backdrop-blur flex items-center gap-2">
 			<div className="flex items-center gap-2">
 				<DockButton
 					label="About"
@@ -77,7 +77,7 @@ function DockButton({
 	return (
 		<button
 			onClick={onClick}
-			className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm hover:bg-white/10 focus:outline-none"
+			className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm border border-white/0 hover:border-solid hover:border-gray-300 hover:shadow-sm focus:outline-none hover:cursor-pointer "
 			title={label}
 			aria-label={label}
 		>

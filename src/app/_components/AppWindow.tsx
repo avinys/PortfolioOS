@@ -49,7 +49,9 @@ export default function AppWindow({
 					onClose={() => close(id)}
 					onFocus={() => focus(id)}
 				/>
-				<div className="flex-1 overflow-auto p-3">{children}</div>
+				<div className="flex-1 overflow-auto bg-white rounded-sm">
+					{children}
+				</div>
 			</motion.div>
 		</Rnd>
 	);

@@ -12,12 +12,12 @@ export function WindowChrome({
 }) {
 	return (
 		<div
-			className="flex items-center justify-between border-b border-white/10 bg-white/5 px-3 py-2 backdrop-blur"
+			className="flex items-center justify-between border-b border-white/10 bg-gray-100 px-3 py-2 backdrop-blur"
 			onMouseDown={onFocus}
 		>
 			<span className="text-sm font-medium">{title}</span>
 			<button
-				className="rounded p-1 hover:bg-white/10 focus:outline-none"
+				className="rounded p-1 hover:bg-gray-200 hover:cursor-pointer focus:outline-none"
 				aria-label="Close window"
 				onClick={onClose}
 			>

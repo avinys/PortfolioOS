@@ -4,7 +4,7 @@ export type Project = {
 	summary: string;
 	stack: string[];
 	highlights: string[];
-	links?: { demo?: string; code?: string };
+	links?: { url?: string; code?: string };
 };
 export const projects: Project[] = [
 	{
@@ -26,6 +26,9 @@ export const projects: Project[] = [
 			"Time entries CRUD with validation",
 			"Deployed on cloud Ubuntu server with systemd & Nginx",
 		],
-		links: { code: "https://github.com/avinys/TimeTrackerUI" },
+		links: {
+			code: "https://github.com/avinys/TimeTrackerUI",
+			url: "https://timetracker.arvydasvingis.com",
+		},
 	},
 ];

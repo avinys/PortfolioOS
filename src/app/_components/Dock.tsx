@@ -13,7 +13,7 @@ import { useTheme } from "next-themes";
 import { useUI } from "@/store/ui";
 
 export default function Dock() {
-	const { open, toggleLite, lite } = useUI();
+	const { wins, open, toggleLite, lite } = useUI();
 	const { theme, setTheme } = useTheme();
 	return (
 		<div className=" w-screen justify-center fixed bottom-[-8px] left-1/2 z-50 -translate-x-1/2 border border-white bg-gray-200 px-3 py-2 pb-4 backdrop-blur flex items-center gap-2">
@@ -21,26 +21,31 @@ export default function Dock() {
 				<DockButton
 					label="About"
 					onClick={() => open("about")}
+					active={wins["about"].open}
 					icon={<User2 />}
 				/>
 				<DockButton
 					label="Projects"
 					onClick={() => open("projects")}
+					active={wins["projects"].open}
 					icon={<Folder />}
 				/>
 				<DockButton
 					label="Skills"
 					onClick={() => open("skills")}
+					active={wins["skills"].open}
 					icon={<Wrench />}
 				/>
 				<DockButton
 					label="Contact"
 					onClick={() => open("contact")}
+					active={wins["contact"].open}
 					icon={<Mail />}
 				/>
 				<DockButton
 					label="Terminal"
 					onClick={() => open("terminal")}
+					active={wins["terminal"].open}
 					icon={<Terminal />}
 				/>
 				<div className="mx-2 h-6 w-px bg-white/20" />
@@ -69,15 +74,19 @@ function DockButton({
 	label,
 	onClick,
 	icon,
+	active,
 }: {
 	label: string;
 	onClick: () => void;
 	icon?: React.ReactNode;
+	active?: boolean;
 }) {
 	return (
 		<button
 			onClick={onClick}
-			className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm border border-white/0 hover:border-solid hover:border-gray-300 hover:shadow-sm focus:outline-none hover:cursor-pointer "
+			className={`flex items-center gap-2 rounded-lg px-2 py-1 text-sm border border-white/0 hover:border-solid hover:border-gray-300 hover:shadow-sm focus:outline-none hover:cursor-pointer ${
+				active ? "border-b-indigo-500 border-b-3" : ""
+			}`}
 			title={label}
 			aria-label={label}
 		>

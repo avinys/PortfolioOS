@@ -38,7 +38,7 @@ export default function AppWindow({
 			minHeight={200}
 		>
 			<motion.div
-				className="flex h-full flex-col rounded-xl border border-white/10 bg-[hsl(var(--background))] shadow-xl"
+				className="flex h-full flex-col overflow-hidden rounded-sm border border-white/10 bg-[hsl(var(--background))] shadow-xl"
 				onMouseDown={() => focus(id)}
 				initial={{ opacity: 0.95, scale: 0.985 }}
 				animate={{ opacity: 1, scale: 1 }}
@@ -49,9 +49,7 @@ export default function AppWindow({
 					onClose={() => close(id)}
 					onFocus={() => focus(id)}
 				/>
-				<div className="flex-1 overflow-auto bg-white rounded-sm">
-					{children}
-				</div>
+				<div className="flex-1 overflow-auto bg-white">{children}</div>
 			</motion.div>
 		</Rnd>
 	);

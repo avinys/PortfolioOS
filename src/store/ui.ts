@@ -64,7 +64,11 @@ export const useUI = create<UI>((set) => ({
 		set((s) => ({
 			wins: {
 				...s.wins,
-				[id]: { ...s.wins[id], open: true, z: ++zCounter },
+				[id]: {
+					...s.wins[id],
+					open: s.wins[id].open ? false : true,
+					z: ++zCounter,
+				},
 			},
 		})),
 	close: (id) =>

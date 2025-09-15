@@ -12,7 +12,7 @@ export function WindowChrome({
 }) {
 	return (
 		<div
-			className="flex items-center justify-between border-b border-white/10 bg-gray-100 px-3 py-2 backdrop-blur"
+			className="flex items-center justify-between border-b border-white/10 bg-gray-100 px-3 py-2 backdrop-blur  overflow-auto"
 			onMouseDown={onFocus}
 		>
 			<span className="text-sm font-medium">{title}</span>

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type AppId = "about" | "projects" | "skills" | "contact" | "terminal";
+export type AppId = "about" | "projects" | "skills" | "contacts" | "terminal";
 export type Win = {
 	id: AppId;
 	z: number;
@@ -13,24 +13,24 @@ export type Win = {
 
 let zCounter = 1;
 const defaults: Record<AppId, Win> = {
-	about: { id: "about", z: 1, open: true, x: 80, y: 90, w: 420, h: 360 },
+	about: { id: "about", z: 1, open: true, x: 80, y: 90, w: 550, h: 280 },
 	projects: {
 		id: "projects",
 		z: 0,
 		open: false,
 		x: 220,
 		y: 140,
-		w: 560,
+		w: 730,
 		h: 420,
 	},
-	skills: { id: "skills", z: 0, open: false, x: 300, y: 120, w: 460, h: 360 },
-	contact: {
-		id: "contact",
+	skills: { id: "skills", z: 0, open: false, x: 300, y: 120, w: 660, h: 360 },
+	contacts: {
+		id: "contacts",
 		z: 0,
 		open: false,
 		x: 360,
 		y: 160,
-		w: 360,
+		w: 550,
 		h: 300,
 	},
 	terminal: {

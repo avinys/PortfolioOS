@@ -16,7 +16,7 @@ export default function Dock() {
 	const { wins, open, toggleLite, lite } = useUI();
 	const { theme, setTheme } = useTheme();
 	return (
-		<div className=" w-screen justify-center fixed bottom-[-8px] left-1/2 z-50 -translate-x-1/2 border border-white bg-gray-200 px-3 py-2 pb-4 backdrop-blur flex items-center gap-2">
+		<div className=" w-screen justify-center fixed bottom-[-8px] left-1/2 z-50 -translate-x-1/2 border border-gray-100 bg-gray-200 px-3 py-2 pb-4 backdrop-blur flex items-center gap-2">
 			<div className="flex items-center gap-2">
 				<DockButton
 					label="About"
@@ -38,8 +38,8 @@ export default function Dock() {
 				/>
 				<DockButton
 					label="Contact"
-					onClick={() => open("contact")}
-					active={wins["contact"].open}
+					onClick={() => open("contacts")}
+					active={wins["contacts"].open}
 					icon={<Mail />}
 				/>
 				<DockButton
@@ -48,12 +48,12 @@ export default function Dock() {
 					active={wins["terminal"].open}
 					icon={<Terminal />}
 				/>
-				<div className="mx-2 h-6 w-px bg-white/20" />
-				<DockButton
+				{/* <DockButton
 					label="Resume"
 					onClick={() => (window.location.href = "/resume")}
 					icon={<FileText />}
-				/>
+				/> */}
+				<div className="mx-2 h-6 w-px bg-white/20" />
 				<DockButton
 					label={theme === "light" ? "Dark" : "Light"}
 					onClick={() =>
@@ -90,9 +90,11 @@ function DockButton({
 			title={label}
 			aria-label={label}
 		>
-			<span className="inline-flex h-5 w-5 items-center justify-center">
-				{icon}
-			</span>
+			{icon && (
+				<span className="inline-flex h-5 w-5 items-center justify-center">
+					{icon}
+				</span>
+			)}
 			<span className="hidden sm:inline">{label}</span>
 		</button>
 	);

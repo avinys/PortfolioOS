@@ -36,9 +36,10 @@ export default function AppWindow({
 			bounds="window"
 			minWidth={320}
 			minHeight={200}
+			dragHandleClassName="window-handle"
 		>
 			<motion.div
-				className="flex h-full flex-col overflow-hidden rounded-sm border border-white/10 bg-[hsl(var(--background))] shadow-xl"
+				className="flex h-full flex-col overflow-hidden rounded-sm border border-white/10 bg-[#ECEEDF] shadow-xl"
 				onMouseDown={() => focus(id)}
 				initial={{ opacity: 0.95, scale: 0.985 }}
 				animate={{ opacity: 1, scale: 1 }}

@@ -7,7 +7,7 @@ import { projects } from "@/content/projects";
 type XTerm = import("@xterm/xterm").Terminal;
 type FitAddon = import("@xterm/addon-fit").FitAddon;
 
-const banner = "Welcome to av-os (type `help`)\r\n";
+const banner = "### Welcome to av-os (type `help`) ###\r\n";
 
 export default function TerminalPane() {
 	const hostRef = useRef<HTMLDivElement>(null);
@@ -99,7 +99,10 @@ export default function TerminalPane() {
 	}, []);
 
 	return (
-		<div ref={hostRef} className="h-full w-full bg-black/60 text-white" />
+		<div
+			ref={hostRef}
+			className="h-full w-full bg-black/60 text-white overflow-hidden"
+		/>
 	);
 }
 
@@ -121,7 +124,7 @@ function handleCommand(
 		case "help":
 			writeLine(
 				term,
-				`help                Show commands\r\nwhoami               Short bio\r\nskills               List skills\r\nprojects             List projects\r\nopen <about|projects|skills|contact>  Open app\r\nemail                Copy email to clipboard\r\nclear                Clear terminal`
+				`help                 Show commands\r\nwhoami               Short bio\r\nskills               List skills\r\nprojects             List projects\r\nopen <about|projects|skills|contact>  Open app\r\nemail                Copy email to clipboard\r\nclear                Clear terminal`
 			);
 			break;
 		case "whoami":

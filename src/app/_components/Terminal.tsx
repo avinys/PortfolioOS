@@ -51,9 +51,10 @@ function writeLine(term: XTerm, line = "") {
 function prompt(term: XTerm) {
 	term.write("\r\n" + PROMPT);
 }
-function refreshInput(term: XTerm, buffer: string) {
-	// Clear current line and redraw the prompt + buffer
+function renderLine(term: XTerm, buffer: string, cursor: number) {
 	term.write("\x1b[2K\r" + PROMPT + buffer);
+	const back = Math.max(0, buffer.length - cursor);
+	if (back > 0) term.write(`\x1b[${back}D`);
 }
 function handleCommand(
 	term: XTerm,
@@ -160,35 +161,86 @@ async function setupTerminal(
 
 	/* Input or history inputs wiring */
 	let buffer = "";
+	let cursor = 0;
 	const history: string[] = [];
 	let histIndex = -1;
 
 	/* handle Arrow keys */
 	const keyDisp = term.onKey(({ domEvent }) => {
-		if (domEvent.key === "ArrowUp" || domEvent.key === "ArrowDown") {
-			domEvent.preventDefault();
+		domEvent.preventDefault();
 
-			if (domEvent.key === "ArrowUp") {
-				if (!history.length) return;
-				histIndex =
-					histIndex === -1
-						? history.length - 1
-						: Math.max(0, histIndex - 1);
+		if (domEvent.key === "ArrowUp") {
+			if (!history.length) return;
+			histIndex =
+				histIndex === -1
+					? history.length - 1
+					: Math.max(0, histIndex - 1);
+			buffer = history[histIndex] ?? "";
+			cursor = buffer.length;
+			renderLine(term, buffer, cursor);
+		}
+
+		if (domEvent.key === "ArrowDown") {
+			if (!history.length || histIndex === -1) return;
+			if (histIndex >= history.length - 1) {
+				histIndex = -1;
+				buffer = "";
+			} else {
+				histIndex = Math.min(histIndex + 1, history.length - 1);
 				buffer = history[histIndex] ?? "";
-				refreshInput(term, buffer);
 			}
+			cursor = buffer.length;
+			renderLine(term, buffer, cursor);
+		}
 
-			if (domEvent.key === "ArrowDown") {
-				if (!history.length || histIndex === -1) return;
-				if (histIndex >= history.length - 1) {
-					histIndex = -1;
-					buffer = "";
-				} else {
-					histIndex = Math.min(histIndex + 1, history.length - 1);
-					buffer = history[histIndex] ?? "";
-				}
-				refreshInput(term, buffer);
+		if (domEvent.key === "ArrowLeft") {
+			if (cursor > 0) {
+				cursor -= 1;
+				term.write("\x1b[D");
 			}
+			return;
+		}
+
+		if (domEvent.key === "ArrowRight") {
+			if (cursor < buffer.length) {
+				cursor += 1;
+				term.write("\x1b[C");
+			}
+			return;
+		}
+
+		if (domEvent.key === "Backspace") {
+			domEvent.preventDefault();
+			if (cursor > 0) {
+				buffer = buffer.slice(0, cursor - 1) + buffer.slice(cursor);
+				cursor -= 1;
+				renderLine(term, buffer, cursor);
+			}
+			return;
+		}
+
+		if (domEvent.key === "Delete") {
+			domEvent.preventDefault();
+			if (cursor < buffer.length) {
+				buffer = buffer.slice(0, cursor) + buffer.slice(cursor + 1);
+				renderLine(term, buffer, cursor);
+			}
+			return;
+		}
+
+		if (domEvent.key === "Home") {
+			if (cursor !== 0) {
+				cursor = 0;
+				renderLine(term, buffer, cursor);
+			}
+			return;
+		}
+		if (domEvent.key === "End") {
+			if (cursor !== buffer.length) {
+				cursor = buffer.length;
+				renderLine(term, buffer, cursor);
+			}
+			return;
 		}
 	});
 
@@ -204,24 +256,20 @@ async function setupTerminal(
 			histIndex = -1;
 			handleCommand(term, command, { open });
 			buffer = "";
+			cursor = 0;
 			prompt(term);
 			return;
 		}
 
-		if (code === 127) {
-			// Backspace
-			if (buffer.length > 0) {
-				buffer = buffer.slice(0, -1);
-				// Move one space, overwrite with whitespace, go back one space
-				term.write("\b \b");
-			}
+		if (code === 127 || code == 8) {
 			return;
 		}
 
 		if (code < 32) return;
 
-		buffer += data;
-		term.write(data);
+		buffer = buffer.slice(0, cursor) + data + buffer.slice(cursor);
+		cursor += data.length;
+		renderLine(term, buffer, cursor);
 	});
 
 	// Fit terminal to container on resize

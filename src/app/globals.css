@@ -1,35 +1,221 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -----------------------------
+   Semantic tokens (LIGHT)
+   ----------------------------- */
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
+  /* App background  */
+  --bg-start: #e8dfca; /* darker beige */
+  --bg-end: #f5efe6; /*lighter cream */
+
+  /* Text */
+  --fg: #1f2937; /* slate-800 */
+  --fg-muted: #6b7280; /* slate-500 */
+
+  /* Surfaces / cards / panels */
+  --surface: #ffffff;
+  --panel: #eceedf; /*  window body bg */
+  --chip: #eef2ff; /* indigo-50-ish */
+  --chip-text: #1e1b4b; /* indigo-950-ish */
+
+  /* Borders & rings */
+  --border: #e5e7eb; /* gray-200 */
+  --border-strong: #d1d5db; /* gray-300 */
+  --ring: #818cf8; /* indigo-400 */
+
+  /* Indigo accent scale  */
+  --accent-50: #eef2ff;
+  --accent-100: #e0e7ff;
+  --accent-200: #c7d2fe;
+  --accent-300: #a5b4fc;
+  --accent-400: #818cf8;
+  --accent-500: #6366f1;
+  --accent-600: #4f46e5;
+  --accent-700: #4338ca;
+  --accent-950: #1e1b4b;
+
+  /* Dock */
+  --dock-bg: #e5e7eb; /* gray-200 */
+  --dock-border: #f5f5f5; /* gray-100 */
+
+  /* Terminal overlay */
+  --terminal-bg: rgba(0, 0, 0, 0.6);
+  --terminal-fg: #ffffff;
+
+  /* Fonts (optional – hook to your font vars if you have them) */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial,
+    "Noto Sans", "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
+
+/* -----------------------------
+   Dark overrides
+   ----------------------------- */
+.dark {
+  --bg-start: #1e1b4b; /* your terminal-ish charcoal */
+  --bg-end: #111827; /* gray-900-ish */
+
+  --fg: #e5e7eb; /* gray-200 */
+  --fg-muted: #9ca3af; /* gray-400 */
+
+  --surface: #0f172a; /* slate-900-ish */
+  --panel: #0b0f17; /* darker panel */
+  --chip: #1f2445; /* a dark indigo-tinted chip */
+  --chip-text: #e0e7ff;
+
+  --border: #374151; /* gray-700 */
+  --border-strong: #4b5563; /* gray-600 */
+  --ring: #818cf8; /* keep ring visible on dark */
+
+  /* Keep accent scale */
+  /* Dock */
+  --dock-bg: #1f2937; /* gray-800 */
+  --dock-border: #374151; /* gray-700 */
+
+  /* Terminal */
+  --terminal-bg: rgba(0, 0, 0, 0.7);
+  --terminal-fg: #ffffff;
+}
+
+.theme-changing * {
+  transition-property:
+    background-color, color, border-color, fill, stroke, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-changing * {
+    transition: none !important;
+  }
 }
 
 @theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--font-sans: var(--font-geist-sans);
-	--font-mono: var(--font-geist-mono);
+  --color-foreground: var(--fg);
+
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-muted: var(--fg-muted);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+
+  --color-accent-50: var(--accent-50);
+  --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
+  --color-accent-700: var(--accent-700);
+  --color-accent-950: var(--accent-950);
+
+  --color-dock-bg: var(--dock-bg);
+  --color-dock-border: var(--dock-border);
+
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-fg: var(--terminal-fg);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
+/* -----------------------------
+   Base element styles
+   ----------------------------- */
+html,
+body {
+  height: 100%;
 }
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg-start);
+  color: var(--fg);
 }
 
-.xterm .xterm-screen {
-	padding-left: 0.5rem; /* ~12px */
+/* -----------------------------
+   Component alignments with your current classes
+   (reference notes so tokens match your JSX)
+   ----------------------------- */
+/* Window (AppWindow motion div)
+   rounded-sm border border-white/10 bg-[#ECEEDF] shadow-xl
+   → use bg-panel + a subtle border token (or keep your exact class names) */
+
+/* Contact card
+   border indigo-200/70, bg white/70 → use border-accent-200 and bg-surface/70 */
+
+/* Dock bar
+   border-gray-100 bg-gray-200 → use bg-dock-bg / border-dock-border */
+
+/* ProjectMedia frame
+   border-gray-300 border-2 shadow-lg → use border-border-strong */
+
+/* Stack & highlight chips
+   bg-indigo-100/50 text-indigo-950 border-indigo-200/60 → map to accent tokens */
+
+/* WindowChrome (title bar)
+   border-b-2 border-indigo-500 bg-indigo-200 text-indigo-950 → accent-200/500/950 */
+
+/* Terminal host */
+.terminal-host {
+  background: var(--color-terminal-bg);
+  color: var(--color-terminal-fg);
 }
 
+/* -----------------------------
+   xterm tweaks
+   ----------------------------- */
+.xterm .xterm-viewport::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 .xterm .xterm-viewport {
-	padding-left: 0.5rem;
-	box-sizing: border-box;
+  scrollbar-width: none;
+  padding-left: 0.5rem;
+  box-sizing: border-box;
+}
+.xterm .xterm-screen {
+  padding-left: 0.5rem;
+}
+
+/* -----------------------------
+   Helpers
+   ----------------------------- */
+
+.bg-surface {
+  background-color: var(--surface);
+}
+.bg-panel {
+  background-color: var(--panel);
+}
+.text-foreground {
+  color: var(--fg);
+}
+.text-muted {
+  color: var(--fg-muted);
+}
+.border-border {
+  border-color: var(--border);
+}
+.border-border-strong {
+  border-color: var(--border-strong);
+}
+.ring-accent {
+  --tw-ring-color: var(--ring);
+}
+.bg-dock {
+  background-color: var(--dock-bg);
+}
+.border-dock {
+  border-color: var(--dock-border);
 }

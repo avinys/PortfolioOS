@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Portfolio OS",
+  icons: {
+    icon: { url: "/av_logo_white.png", sizes: "48x48" },
+  },
 };
 
 export default function RootLayout({

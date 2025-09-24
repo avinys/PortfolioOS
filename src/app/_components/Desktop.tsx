@@ -14,7 +14,7 @@ export default function Desktop() {
     <div className="relative h-dvh w-screen overflow-hidden">
       <div className="dark: absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--bg-start),var(--bg-end))]" />
       <div className="absolute inset-0 -z-10 flex items-center justify-center">
-        <img className="h-[50rem] opacity-75" src="/av.png" />
+        <img className="h-[40rem] opacity-75" src="/av.png" />
       </div>
 
       <AppWindow id="about" title="About Me">

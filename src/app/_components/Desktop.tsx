@@ -7,6 +7,7 @@ import TerminalPane from "./Terminal";
 import Projects from "./Projects";
 import Skills from "./Skills";
 import Contacts from "./Contacts";
+import Resume from "./Resume";
 
 export default function Desktop() {
   return (
@@ -32,6 +33,9 @@ export default function Desktop() {
         <div className="h-full">
           <TerminalPane />
         </div>
+      </AppWindow>
+      <AppWindow id="resume" title="Resume">
+        <Resume />
       </AppWindow>
       <Dock />
 

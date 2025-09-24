@@ -58,11 +58,11 @@ export default function Dock() {
           active={wins["terminal"].open}
           icon={<Terminal />}
         />
-        {/* <DockButton
-					label="Resume"
-					onClick={() => (window.location.href = "/resume")}
-					icon={<FileText />}
-				/> */}
+        <DockButton
+          label="Resume"
+          onClick={() => open("resume")}
+          icon={<FileText />}
+        />
         <div className="mx-2 h-6 w-px bg-white/20" />
         <DockButton
           label={

@@ -16,7 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Portfolio OS",
   icons: {
-    icon: { url: "/av_logo_white.png", sizes: "48x48" },
+    icon: [
+      { url: "/av_logo_dark.png", media: "(prefers-color-scheme: light)" },
+      { url: "/av_logo_white.png", media: "(prefers-color-scheme: dark)" },
+    ],
   },
 };
 

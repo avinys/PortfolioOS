@@ -1,9 +1,7 @@
-import { useUI } from "@/store/ui";
-import ProjectMedia from "./ProjectMedia";
 import { projects } from "@/content/projects";
+import ProjectMedia from "./ProjectMedia";
 
 function Projects() {
-  const { lite } = useUI();
   return (
     <ul className="space-y-4">
       {projects.map((p) => (
@@ -32,20 +30,15 @@ function Projects() {
               </li>
             ))}
           </ul>
-          {lite ? (
-            <img
-              src="/media/timetracker/poster.jpg"
-              alt="TimeTracker poster"
-              className="border-accent-50/10 rounded-md border"
-            />
-          ) : (
-            <ProjectMedia
-              webmSrc="/media/timetracker/timetracker.webm"
-              gifSrc="/media/timetracker/timetracker.gif"
-              poster="/media/timetracker/poster.jpg"
-              alt="Browsing the TimeTracker app"
-            />
-          )}
+
+          <ProjectMedia
+            webmSrc={p.files.webm}
+            gifSrc={p.files.gif}
+            posterSrc={p.files.poster}
+            videoAlt={p.files.videoAlt}
+            posterAlt={p.files.posterAlt}
+          />
+
           <div className="text-md mt-4 flex flex-row items-center justify-center gap-8 text-center">
             {p.links?.code && (
               <div>

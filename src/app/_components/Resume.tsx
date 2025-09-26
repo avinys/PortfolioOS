@@ -45,7 +45,7 @@ export default function Resume() {
         </h2>
         <p className="text-fg-muted text-sm">
           React + TypeScript, Next.js, .NET APIs. I like clean architecture,
-          accessible UI, and shipping real, pragmatic solutions.
+          accessible UI, and shipping solutions, creating real value.
         </p>
       </div>
       {/* Education */}

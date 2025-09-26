@@ -1,13 +1,12 @@
 "use client";
-import { useUI } from "@/store/ui";
 import About from "./About";
 import AppWindow from "./AppWindow";
-import Dock from "./Dock";
-import TerminalPane from "./Terminal";
-import Projects from "./Projects";
-import Skills from "./Skills";
 import Contacts from "./Contacts";
+import Dock from "./Dock";
+import Projects from "./Projects";
 import Resume from "./Resume";
+import Skills from "./Skills";
+import TerminalPane from "./Terminal";
 
 export default function Desktop() {
   return (

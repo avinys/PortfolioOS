@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import "@xterm/xterm/css/xterm.css";
-import { useUI } from "@/store/ui";
+import { AppId, useUI } from "@/store/ui";
 import { projects } from "@/content/projects";
 type XTerm = import("@xterm/xterm").Terminal;
 type FitAddon = import("@xterm/addon-fit").FitAddon;
@@ -34,7 +34,7 @@ export default function TerminalPane() {
       alive = false;
       dispose?.();
     };
-  }, []);
+  }, [open]);
 
   return (
     <div
@@ -59,7 +59,7 @@ function renderLine(term: XTerm, buffer: string, cursor: number) {
 function handleCommand(
   term: XTerm,
   cmd: string,
-  api: { open: (id: any) => void },
+  api: { open: (id: AppId) => void },
 ) {
   if (!cmd) return;
   const [name, ...args] = cmd.split(" ");
@@ -95,7 +95,7 @@ function handleCommand(
       writeLine(term, "hint: open projects");
       break;
     case "open": {
-      const target = args[0] as any;
+      const target = args[0] as AppId;
       if (["about", "projects", "skills", "contact"].includes(target))
         api.open(target);
       else writeLine(term, "Usage: open about|projects|skills|contact");
@@ -120,7 +120,7 @@ function handleCommand(
 
 async function setupTerminal(
   host: HTMLDivElement,
-  open: (id: any) => void,
+  open: (id: AppId) => void,
   alive: boolean,
 ) {
   const { Terminal } = await import("@xterm/xterm");

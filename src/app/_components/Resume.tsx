@@ -2,11 +2,18 @@
 
 import { Download, ExternalLink, Printer } from "lucide-react";
 import React from "react";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 
 const PDF_URL = "/resume/Arvydas-Vingis-CV.pdf";
 
 export default function Resume() {
-  console.log("Resume renders");
+  const bp = useBreakpoint();
+  console.log(bp);
+
+  const canEmbed =
+    bp === "desktop" &&
+    typeof navigator !== "undefined" &&
+    !/iPad|iPhone|iPod/i.test(navigator.userAgent);
   const openPdf = () => window.open(PDF_URL, "_blank", "noopener,noreferrer");
   const downloadPdf = () => {
     const a = document.createElement("a");
@@ -141,22 +148,19 @@ export default function Resume() {
           Bootcamp, The Advanced JavaScript Concepts, 100 Days of Code (Python)
         </p>
       </Section>
-      <details className="mt-2">
-        <summary className="text-fg-muted cursor-pointer text-sm">
-          Preview PDF
-        </summary>
-        <object
-          data={PDF_URL}
-          type="application/pdf"
-          className="border-border mt-2 h-[60vh] w-full rounded border"
-        >
+
+      {canEmbed && (
+        <details className="mt-2">
+          <summary className="text-fg-muted cursor-pointer text-sm">
+            Preview PDF
+          </summary>
           <iframe
             src={PDF_URL}
             className="h-[60vh] w-full"
             title="Resume PDF"
           />
-        </object>
-      </details>
+        </details>
+      )}
     </div>
   );
 }

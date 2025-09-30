@@ -1,17 +1,20 @@
 "use client";
+import { useUI } from "@/store/ui";
 import {
-  Terminal,
+  Feather,
+  FileText,
   Folder,
+  Mail,
+  Moon,
+  Rocket,
+  Sun,
+  Terminal,
   User2,
   Wrench,
-  Mail,
-  FileText,
-  Sun,
-  Moon,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useUI } from "@/store/ui";
 import { useEffect, useState } from "react";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 
 export default function Dock() {
   const { wins, open, toggleLite, lite } = useUI();
@@ -26,8 +29,8 @@ export default function Dock() {
   };
 
   return (
-    <div className="border-dock bg-dock fixed bottom-[-8px] left-1/2 z-50 flex w-screen -translate-x-1/2 items-center justify-center gap-2 border px-3 py-2 pb-4 backdrop-blur">
-      <div className="flex items-center gap-2">
+    <div className="border-dock bg-dock flex h-12 w-full flex-row justify-center border px-3 py-2 pb-4 text-center backdrop-blur sm:h-20 md:h-12 lg:fixed lg:bottom-0 lg:left-1/2 lg:w-screen lg:-translate-x-1/2">
+      <div className="flex items-center gap-1 sm:gap-2">
         <DockButton
           label="About"
           onClick={() => open("about")}
@@ -61,6 +64,7 @@ export default function Dock() {
         <DockButton
           label="Resume"
           onClick={() => open("resume")}
+          active={wins["resume"].open}
           icon={<FileText />}
         />
         <div className="mx-2 h-6 w-px bg-white/20" />
@@ -84,6 +88,7 @@ export default function Dock() {
         <DockButton
           label={lite ? "Lite: On" : "Lite: Off"}
           onClick={toggleLite}
+          icon={lite ? <Rocket /> : <Feather />}
         />
       </div>
     </div>
@@ -101,12 +106,11 @@ function DockButton({
   icon?: React.ReactNode;
   active?: boolean;
 }) {
+  const bp = useBreakpoint();
   return (
     <button
       onClick={onClick}
-      className={`hover:border-dock flex items-center gap-2 rounded-lg border border-white/0 px-2 py-1 text-sm hover:cursor-pointer hover:border-solid hover:shadow-sm focus:outline-none ${
-        active ? "border-b-accent-500 border-b-3" : ""
-      }`}
+      className={`hover:border-dock flex flex-col items-center justify-center gap-2 rounded-lg border border-white/0 px-2 py-1 text-sm hover:cursor-pointer hover:border-solid hover:shadow-sm focus:outline-none md:flex-row ${active ? "border-b-accent-500 border-b-3" : ""}`}
       title={label}
       aria-label={label}
     >
@@ -115,7 +119,9 @@ function DockButton({
           {icon}
         </span>
       )}
-      <span className="hidden sm:inline">{label}</span>
+      <span className="md:text-md hidden text-sm wrap-normal sm:inline">
+        {label}
+      </span>
     </button>
   );
 }

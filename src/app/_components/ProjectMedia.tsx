@@ -40,6 +40,8 @@ export default function ProjectMedia({
     return () => io.disconnect();
   }, []);
 
+  if (!posterSrc && !webmSrc && !gifSrc) return null;
+
   return (
     <div className="border-accent-50 overflow-hidden rounded-sm border-2 shadow-lg">
       {lite ? (

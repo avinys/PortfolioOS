@@ -70,4 +70,93 @@ export const projects: Project[] = [
       url: undefined,
     },
   },
+
+  {
+    slug: "portfolio",
+    title: "Portfolio-OS (this website)",
+    summary:
+      "Simplified Desktop-OS style portfolio website, made with Next.js and Tailwind.",
+    stack: ["JavaScript", "React", "Supabase", "Tailwind CSS"],
+    highlights: [
+      "Draggable, resizable app windows and custom dock navigation.",
+      "Interactive terminal built with XTerm.js, supporting commands, history, opening windows.",
+      "Dark/Light theme toggle and Lite mode for lighter resources",
+      "Deployed as a static Next.js export on Ubuntu server",
+    ],
+    files: {
+      webm: "",
+      gif: "",
+      poster: "",
+      posterAlt: "",
+      videoAlt: "",
+    },
+    links: {
+      code: "https://github.com/avinys/PortfolioOS",
+      url: undefined,
+    },
+  },
+
+  {
+    slug: "wild-oasis",
+    title: "The Wild Oasis",
+    summary:
+      "Luxury cabins hotel administration system. Allows changing the cabins information, checking-in guests, changing main settings for booking. Project I made during React course.",
+    stack: [
+      "React",
+      "Tanstack Query",
+      "Styled components",
+      "React Router",
+      "React Hook Form",
+    ],
+    highlights: [
+      "Supabase authentication and authorization",
+      "Full CRUD for cabins, bookings and guests.",
+      "Reusable styled components, notifications with React Hot Toast, form validation with Ract Hook Form.",
+      "Dashboard with KPIs and charts (Recharts), Tanstack Query caching.",
+    ],
+    files: {
+      webm: "/media/wild-oasis/wild-oasis.webm",
+      gif: "/media/wild-oasis/wild-oasis.gif",
+      poster: "/media/wild-oasis/wild-oasis.jpg",
+      posterAlt: "Wild Oasis luxury cabins hotel management application poster",
+      videoAlt:
+        "Browsing the Wild Oasis - luxury cabins hotel management application",
+    },
+    links: {
+      code: "https://github.com/avinys/React-Course-P18-wild-oasis",
+      url: undefined,
+    },
+  },
+
+  {
+    slug: "wild-oasis-client",
+    title: "The Wild Oasis (client side)",
+    summary:
+      "Luxury cabins hotel website for guests. Supports viewing cabins and creating, updating, managing bookings witha personal account area. Project I made during React course.",
+    stack: [
+      "React",
+      "Next.js",
+      "Tanstack Query",
+      "Tailwind CSS",
+      "NextAuth v5",
+      "React Day Picker",
+    ],
+    highlights: [
+      "Google Sign-In integration with NextAuth v5",
+      "Supabase integration for guests, cabins, and bookings with server actions",
+      "Interactive date range picker with booked-date blackout, capacity checks and price calculation",
+      "Guest area to view & edit resservations and update profile info",
+    ],
+    files: {
+      webm: "/media/wild-oasis-client/wild-oasis-client.webm",
+      gif: "/media/wild-oasis-client/wild-oasis-client.gif",
+      poster: "/media/wild-oasis-client/wild-oasis-client.jpg",
+      posterAlt: "Wild Oasis luxury cabins booking website",
+      videoAlt: "Browsing the Wild Oasis - luxury cabins hotel booking website",
+    },
+    links: {
+      code: "https://github.com/avinys/React-Course-P19-wild-oasis-client",
+      url: undefined,
+    },
+  },
 ];

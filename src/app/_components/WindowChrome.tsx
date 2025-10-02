@@ -17,7 +17,7 @@ export function WindowChrome({
     >
       <span className="text-fg text-sm font-bold">{title}</span>
       <button
-        className="no-drag hover:bg-accent-100 rounded p-1 hover:cursor-pointer focus:outline-none"
+        className="no-drag hover:bg-accent-100 dark:hover:bg-accent-500 rounded p-1 hover:cursor-pointer focus:outline-none"
         type="button"
         aria-label="Close window"
         onClick={onClose}

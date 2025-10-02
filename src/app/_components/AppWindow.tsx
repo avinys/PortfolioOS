@@ -84,6 +84,7 @@ export default function AppWindow({
       minWidth={320}
       minHeight={200}
       dragHandleClassName="window-handle"
+      cancel=".no-drag"
     >
       <motion.div
         className="bg-panel border-border flex h-full flex-col overflow-hidden rounded-sm border shadow-xl"

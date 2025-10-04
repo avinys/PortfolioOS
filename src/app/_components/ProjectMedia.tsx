@@ -9,11 +9,11 @@ export default function ProjectMedia({
   videoAlt,
   posterAlt,
 }: {
-  webmSrc: string;
-  gifSrc: string;
-  posterSrc: string;
-  videoAlt: string;
-  posterAlt: string;
+  webmSrc?: string;
+  gifSrc?: string;
+  posterSrc?: string;
+  videoAlt?: string;
+  posterAlt?: string;
 }) {
   const { lite } = useUI();
   const ref = useRef<HTMLVideoElement | null>(null);

@@ -5,11 +5,11 @@ export type Project = {
   stack: string[];
   highlights: string[];
   files: {
-    webm: string;
-    gif: string;
-    poster: string;
-    posterAlt: string;
-    videoAlt: string;
+    webm?: string;
+    gif?: string;
+    poster?: string;
+    posterAlt?: string;
+    videoAlt?: string;
   };
   links?: { url?: string; code?: string };
 };
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     title: "Portfolio-OS (this website)",
     summary:
       "Simplified Desktop-OS style portfolio website, made with Next.js and Tailwind.",
-    stack: ["JavaScript", "React", "Supabase", "Tailwind CSS"],
+    stack: ["JavaScript", "React", "Next.js", "Tailwind CSS"],
     highlights: [
       "Draggable, resizable app windows and custom dock navigation.",
       "Interactive terminal built with XTerm.js, supporting commands, history, opening windows.",
@@ -84,11 +84,11 @@ export const projects: Project[] = [
       "Deployed as a static Next.js export on Ubuntu server",
     ],
     files: {
-      webm: "",
-      gif: "",
-      poster: "",
-      posterAlt: "",
-      videoAlt: "",
+      webm: undefined,
+      gif: undefined,
+      poster: undefined,
+      posterAlt: undefined,
+      videoAlt: undefined,
     },
     links: {
       code: "https://github.com/avinys/PortfolioOS",
@@ -156,6 +156,40 @@ export const projects: Project[] = [
     },
     links: {
       code: "https://github.com/avinys/React-Course-P19-wild-oasis-client",
+      url: undefined,
+    },
+  },
+
+  {
+    slug: "university-website-ai-assistant",
+    title: "University Website AI Assistant",
+    summary:
+      "AI assistant in shape of a chatbot to help students navigate complex university websites. Designed for university project, uses Web Scraping, Semantic Search (SentenceTransformer MiniLM-L6-V2) and Google Gemini 2.0-flash model as AI assistant.",
+    stack: [
+      "React",
+      "Semantic Search",
+      "Gemini API",
+      "Python",
+      "FastAPI",
+      "Sentence Transformers",
+      "BeautifulSoup",
+    ],
+    highlights: [
+      "RAG pipeline: scraper - text chunking - MiniLM-L6-V2 embeddings - Semantic search - Gemini 2.0-flash answers",
+      "Undestands student intents via keyword similarity for Gemini workload minimization, provides links to pages.",
+      "Allows user to select the scraping time - balancing search depth and time based on user preferences.",
+      "Interactive React interface, FastAPI backend, respecting robots.txt and caching search results.",
+    ],
+    files: {
+      webm: undefined,
+      gif: undefined,
+      poster:
+        "/media/university-website-ai-assistant/university-website-ai-assistant.png",
+      posterAlt: "Student Website AI Assistant front page",
+      videoAlt: undefined,
+    },
+    links: {
+      code: "https://github.com/avinys/UUXD-Project-Work",
       url: undefined,
     },
   },

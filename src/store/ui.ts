@@ -19,7 +19,7 @@ export type Win = {
 
 let zCounter = 1;
 const defaults: Record<AppId, Win> = {
-  about: { id: "about", z: 1, open: true, x: 80, y: 80, w: 550, h: 280 },
+  about: { id: "about", z: 1, open: true, x: 80, y: 80, w: 550, h: 380 },
   projects: {
     id: "projects",
     z: 0,

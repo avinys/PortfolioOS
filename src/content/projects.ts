@@ -50,7 +50,7 @@ export const projects: Project[] = [
     slug: "tournament",
     title: "Karate Tournament Bracket",
     summary:
-      "Node.js + Express app for managing traditional karate do tournaments. Supports kumite single-elimination, kata double-elimination brackets, and kata points mode.",
+      "Node.js + Express app for managing traditional karate do tournaments. Supports kumite single-elimination, kata double-elimination brackets, and kata points mode. V1 version archived.",
     stack: ["Node.js", "Express", "EJS", "JavaScript", "CSS"],
     highlights: [
       "Bracket visualization, next-up feature, and results tracking",
@@ -66,7 +66,7 @@ export const projects: Project[] = [
       videoAlt: "Browsing the Karate Tournament Bracket",
     },
     links: {
-      code: "https://github.com/avinys/Tournament-bracket",
+      code: "https://github.com/avinys/Tournament-bracket/tree/v1-archived",
       url: undefined,
     },
   },

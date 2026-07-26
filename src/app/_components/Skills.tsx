@@ -2,18 +2,52 @@ function Skills() {
   return (
     <div className="grid grid-cols-1 gap-4 px-6 py-4 sm:grid-cols-2">
       <SkillGroup
-        title="Frontend"
-        items={["React", "TypeScript", "Next.js", "Vite", "Tailwind"]}
+        title="Web Engineering"
+        items={[
+          "React",
+          "TypeScript",
+          "Next.js",
+          "Accessible UI",
+          "Marketplace experiences",
+        ]}
       />
       <SkillGroup
-        title="Backend"
-        items={[".NET 8", "EF Core", "REST", "JWT Auth"]}
+        title="Frontend Architecture"
+        items={[
+          "Modularization",
+          "Service extraction",
+          "Component architecture",
+          "UI ownership",
+        ]}
       />
       <SkillGroup
-        title="DevOps"
-        items={["Ubuntu", "Nginx", "systemd", "MySQL"]}
+        title="Observability"
+        items={["Prometheus", "Grafana", "Metrics", "Dashboards", "SLOs"]}
       />
-      <SkillGroup title="Tools" items={["Git", "GitHub", "CI basics"]} />
+      <SkillGroup
+        title="Data Interoperability"
+        items={[
+          "Metadata modeling",
+          "SEMIC vocabularies",
+          "Semantic interoperability",
+          "Data documentation",
+        ]}
+      />
+      <SkillGroup
+        title="Backend & Infrastructure"
+        items={[".NET 8", "REST APIs", "MySQL", "Ubuntu", "Nginx", "Git"]}
+      />
+      <SkillGroup
+        title="Engineering Interests & AI"
+        items={[
+          "AI-assisted software engineering",
+          "Coding agents & agentic workflows",
+          "Harness engineering",
+          "Loop engineering",
+          "Reusable agent skills",
+          "Emerging AI tools",
+        ]}
+      />
     </div>
   );
 }

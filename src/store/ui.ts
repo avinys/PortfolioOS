@@ -73,6 +73,7 @@ type UI = {
   wins: Record<AppId, Win>;
   focus: (id: AppId) => void;
   open: (id: AppId) => void;
+  openOrFocus: (id: AppId) => boolean;
   close: (id: AppId) => void;
   move: (id: AppId, pos: Partial<Pick<Win, "x" | "y" | "w" | "h">>) => void;
   toggleLite: () => void;
@@ -96,6 +97,19 @@ export const useUI = create<UI>((set) => ({
         },
       },
     })),
+  openOrFocus: (id) => {
+    let wasOpen = false;
+    set((s) => {
+      wasOpen = s.wins[id].open;
+      return {
+        wins: {
+          ...s.wins,
+          [id]: { ...s.wins[id], open: true, z: ++zCounter },
+        },
+      };
+    });
+    return wasOpen;
+  },
   close: (id) =>
     set((s) => ({
       wins: { ...s.wins, [id]: { ...s.wins[id], open: false } },

@@ -10,7 +10,7 @@ export default function About() {
       </p>
       <ul className="mt-2 list-disc pl-5">
         <li>
-          <strong>Software Systems</strong> student (final year), Kaunas
+          <strong>Software Systems</strong>, Bachelor of Computing, Kaunas
           University of Technology
         </li>
         <li>

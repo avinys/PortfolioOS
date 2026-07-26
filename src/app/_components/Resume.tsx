@@ -2,7 +2,7 @@
 
 import { Download, ExternalLink, Printer } from "lucide-react";
 import React from "react";
-import { experiences } from "@/content/profile";
+import { experiences, profile } from "@/content/profile";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 
 const PDF_URL = "/resume/Arvydas-Vingis-CV.pdf";
@@ -48,12 +48,11 @@ export default function Resume() {
       {/* Header summary */}
       <div className="bg-surface border-accent-200/70 rounded-xl border px-4 py-3 shadow-sm backdrop-blur-sm">
         <h2 className="text-fg text-lg font-semibold">
-          Arvydas Vingis — Web Engineer
+          {profile.name} — {profile.headline}
         </h2>
         <p className="text-fg-muted text-sm">
-          Web Engineer at Vinted building and owning core marketplace
-          experiences with React and TypeScript. Interested in frontend
-          architecture, observability, and AI-assisted software engineering.
+          {profile.introduction} Interested in frontend architecture,
+          observability, and AI-assisted software engineering.
         </p>
       </div>
       {/* Experience */}

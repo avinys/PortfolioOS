@@ -22,7 +22,7 @@ function Skills() {
       />
       <SkillGroup
         title="Observability"
-        items={["Prometheus", "Grafana", "Metrics", "Dashboards"]}
+        items={["Prometheus", "Grafana", "Metrics", "Dashboards", "SLOs"]}
       />
       <SkillGroup
         title="Data Interoperability"

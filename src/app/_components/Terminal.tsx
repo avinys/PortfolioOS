@@ -12,7 +12,7 @@ const PROMPT = "$ ";
 
 export default function TerminalPane() {
   const hostRef = useRef<HTMLDivElement>(null);
-  const { open } = useUI();
+  const { close, openOrFocus } = useUI();
 
   useEffect(() => {
     let alive = true;
@@ -22,7 +22,7 @@ export default function TerminalPane() {
       const host = hostRef.current;
       if (!host) return;
 
-      const setup = await setupTerminal(host, open, alive);
+      const setup = await setupTerminal(host, { close, openOrFocus }, alive);
       if (!alive) {
         setup.dispose();
         return;
@@ -35,7 +35,7 @@ export default function TerminalPane() {
       alive = false;
       dispose?.();
     };
-  }, [open]);
+  }, [close, openOrFocus]);
 
   return (
     <div
@@ -60,7 +60,10 @@ function renderLine(term: XTerm, buffer: string, cursor: number) {
 function handleCommand(
   term: XTerm,
   cmd: string,
-  api: { open: (id: AppId) => void },
+  api: {
+    close: (id: AppId) => void;
+    openOrFocus: (id: AppId) => boolean;
+  },
 ) {
   if (!cmd) return;
   const [name, ...args] = cmd.split(" ");
@@ -101,13 +104,15 @@ function handleCommand(
         ["about", "experience", "projects", "skills", "contacts"].includes(
           target,
         )
-      )
-        api.open(target);
-      else
+      ) {
+        const wasOpen = api.openOrFocus(target);
+        if (wasOpen) writeLine(term, `Window already open: ${target}`);
+      } else {
         writeLine(
           term,
           "Usage: open about|experience|projects|skills|contacts",
         );
+      }
       break;
     }
     case "email":
@@ -120,7 +125,7 @@ function handleCommand(
       prompt(term);
       break;
     case "exit":
-      api.open("terminal");
+      api.close("terminal");
       break;
     default:
       writeLine(term, `command not found: ${name}`);
@@ -129,7 +134,10 @@ function handleCommand(
 
 async function setupTerminal(
   host: HTMLDivElement,
-  open: (id: AppId) => void,
+  api: {
+    close: (id: AppId) => void;
+    openOrFocus: (id: AppId) => boolean;
+  },
   alive: boolean,
 ) {
   const { Terminal } = await import("@xterm/xterm");
@@ -259,7 +267,7 @@ async function setupTerminal(
       if (command && history[history.length - 1] !== command)
         history.push(command);
       histIndex = -1;
-      handleCommand(term, command, { open });
+      handleCommand(term, command, api);
       buffer = "";
       cursor = 0;
       prompt(term);

@@ -143,7 +143,7 @@ body {
   color: var(--fg);
 }
 
-/* The readable document is the default; JavaScript enables the desktop UI. */
+/* The readable document remains visible until the desktop mounts successfully. */
 .semantic-portfolio {
   display: block;
 }
@@ -152,11 +152,11 @@ body {
   display: none;
 }
 
-html[data-js="enabled"] .semantic-portfolio {
+html[data-portfolio-ready="true"] .semantic-portfolio {
   display: none;
 }
 
-html[data-js="enabled"] .interactive-portfolio {
+html[data-portfolio-ready="true"] .interactive-portfolio {
   display: block;
 }
 

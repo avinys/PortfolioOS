@@ -1,4 +1,5 @@
 "use client";
+import { useLayoutEffect } from "react";
 import { experiences, profile } from "@/content/profile";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import About from "./About";
@@ -17,6 +18,14 @@ const previousExperience = experiences.find(
 
 export default function Desktop() {
   const bp = useBreakpoint();
+
+  useLayoutEffect(() => {
+    document.documentElement.dataset.portfolioReady = "true";
+
+    return () => {
+      document.documentElement.dataset.portfolioReady = "false";
+    };
+  }, []);
 
   return (
     <div className="relative h-dvh w-screen overflow-hidden">

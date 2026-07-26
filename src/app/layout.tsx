@@ -99,14 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-js="disabled" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: 'document.documentElement.dataset.js="enabled";',
-          }}
-        />
-      </head>
+    <html lang="en" data-portfolio-ready="false" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

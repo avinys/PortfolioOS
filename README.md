@@ -10,8 +10,10 @@ resizable application windows.
 - Next.js and React render the portfolio as a single-page desktop interface.
 - The dock and XTerm.js terminal open and focus the About, Experience,
   Projects, Skills, Contacts, Terminal, and Resume windows.
+- Progressive enhancement provides the complete portfolio as a readable,
+  semantic document when JavaScript is unavailable.
 - Zustand manages window visibility, position, size, and stacking order.
-- `src/content/profile.ts` and `src/content/projects.ts` keep portfolio content
+- Files in `src/content/` keep profile, project, skill, and contact information
   separate from the presentation components.
 - Tailwind CSS, React RND, and next-themes provide the layout, window behavior,
   and light/dark themes.

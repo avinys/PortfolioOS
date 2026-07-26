@@ -1,5 +1,6 @@
 import { experiences, profile } from "@/content/profile";
 import Desktop from "./_components/Desktop";
+import SemanticPortfolio from "./_components/SemanticPortfolio";
 
 const [currentExperience, previousExperience] = experiences;
 
@@ -73,7 +74,12 @@ export default function Page() {
           __html: JSON.stringify(personStructuredData).replace(/</g, "\\u003c"),
         }}
       />
-      <Desktop />
+      <div className="semantic-portfolio">
+        <SemanticPortfolio />
+      </div>
+      <div className="interactive-portfolio">
+        <Desktop />
+      </div>
     </>
   );
 }

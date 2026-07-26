@@ -143,6 +143,28 @@ body {
   color: var(--fg);
 }
 
+/* The readable document is the default; JavaScript enables the desktop UI. */
+.semantic-portfolio {
+  display: block;
+}
+
+.interactive-portfolio {
+  display: none;
+}
+
+html[data-js="enabled"] .semantic-portfolio {
+  display: none;
+}
+
+html[data-js="enabled"] .interactive-portfolio {
+  display: block;
+}
+
+.semantic-document {
+  min-height: 100%;
+  background: linear-gradient(to right, var(--bg-start), var(--bg-end));
+}
+
 /* -----------------------------
    Component alignments with your current classes
    (reference notes so tokens match your JSX)

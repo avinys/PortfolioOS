@@ -6,6 +6,12 @@ import { WindowChrome } from "./WindowChrome";
 import type { Breakpoint } from "../hooks/useBreakpoint";
 import { useLayoutEffect, useState } from "react";
 
+const WINDOW_PADDING = 5;
+const MIN_WINDOW_WIDTH = 320;
+const MIN_WINDOW_HEIGHT = 200;
+
+type DesktopBounds = { width: number; height: number };
+
 export default function AppWindow({
   id,
   title,
@@ -19,27 +25,51 @@ export default function AppWindow({
 }) {
   const win = useUI((s) => s.wins[id]);
   const { close, focus, move } = useUI();
-  const [areaWidth, setAreaWidth] = useState<number | null>(null);
+  const [desktopBounds, setDesktopBounds] = useState<DesktopBounds | null>(
+    null,
+  );
 
   const effectiveWidth = bp === "tablet" ? Math.min(win.w, 630) : win.w;
 
   useLayoutEffect(() => {
     const areaElement = document.getElementById("desktop-area");
     if (!areaElement) return;
-    const update = () => setAreaWidth(areaElement.clientWidth);
+    const update = () =>
+      setDesktopBounds({
+        width: areaElement.clientWidth,
+        height: areaElement.clientHeight,
+      });
     update();
     const ro = new ResizeObserver(update);
     ro.observe(areaElement);
     return () => ro.disconnect();
-  });
+  }, []);
 
-  const pad = 5;
-  const clampedX =
-    areaWidth == null
-      ? win.x // first paint fallback; will fix after mount
-      : Math.max(pad, Math.min(win.x, areaWidth - effectiveWidth - pad));
+  const availableWidth = desktopBounds
+    ? Math.max(0, desktopBounds.width - WINDOW_PADDING * 2)
+    : null;
+  const availableHeight = desktopBounds
+    ? Math.max(0, desktopBounds.height - WINDOW_PADDING * 2)
+    : null;
+  const width =
+    availableWidth == null
+      ? effectiveWidth
+      : Math.min(effectiveWidth, availableWidth);
+  const height =
+    availableHeight == null ? win.h : Math.min(win.h, availableHeight);
 
-  const initialPos = { x: clampedX, y: Math.max(pad, win.y) };
+  const position = desktopBounds
+    ? {
+        x: Math.max(
+          WINDOW_PADDING,
+          Math.min(win.x, desktopBounds.width - width - WINDOW_PADDING),
+        ),
+        y: Math.max(
+          WINDOW_PADDING,
+          Math.min(win.y, desktopBounds.height - height - WINDOW_PADDING),
+        ),
+      }
+    : { x: win.x, y: win.y };
 
   if (!win.open) return null;
 
@@ -65,10 +95,10 @@ export default function AppWindow({
   return (
     <Rnd
       size={{
-        width: effectiveWidth,
-        height: win.h,
+        width,
+        height,
       }}
-      position={{ x: initialPos.x, y: initialPos.y }}
+      position={position}
       onDragStart={() => focus(id)}
       onDragStop={(_, d) => move(id, { x: d.x, y: d.y })}
       onResizeStop={(_, __, ref, ___, pos) =>
@@ -80,9 +110,17 @@ export default function AppWindow({
         })
       }
       style={{ zIndex: win.z, position: "absolute" }}
-      bounds="window"
-      minWidth={320}
-      minHeight={200}
+      bounds="parent"
+      minWidth={
+        availableWidth != null
+          ? Math.min(MIN_WINDOW_WIDTH, availableWidth)
+          : MIN_WINDOW_WIDTH
+      }
+      minHeight={
+        availableHeight != null
+          ? Math.min(MIN_WINDOW_HEIGHT, availableHeight)
+          : MIN_WINDOW_HEIGHT
+      }
       dragHandleClassName="window-handle"
       cancel=".no-drag"
     >

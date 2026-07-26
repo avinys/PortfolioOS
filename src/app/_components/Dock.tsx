@@ -1,6 +1,7 @@
 "use client";
 import { useUI } from "@/store/ui";
 import {
+  BriefcaseBusiness,
   Feather,
   FileText,
   Folder,
@@ -36,6 +37,12 @@ export default function Dock() {
           onClick={() => open("about")}
           active={wins["about"].open}
           icon={<User2 />}
+        />
+        <DockButton
+          label="Experience"
+          onClick={() => open("experience")}
+          active={wins["experience"].open}
+          icon={<BriefcaseBusiness />}
         />
         <DockButton
           label="Projects"

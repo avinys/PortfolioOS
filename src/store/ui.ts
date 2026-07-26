@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export type AppId =
   | "about"
+  | "experience"
   | "projects"
   | "skills"
   | "contacts"
@@ -20,6 +21,15 @@ export type Win = {
 let zCounter = 1;
 const defaults: Record<AppId, Win> = {
   about: { id: "about", z: 1, open: true, x: 80, y: 80, w: 550, h: 380 },
+  experience: {
+    id: "experience",
+    z: 0,
+    open: false,
+    x: 100,
+    y: 90,
+    w: 720,
+    h: 500,
+  },
   projects: {
     id: "projects",
     z: 0,

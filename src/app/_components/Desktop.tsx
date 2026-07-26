@@ -4,6 +4,7 @@ import About from "./About";
 import dynamic from "next/dynamic";
 const AppWindow = dynamic(() => import("./AppWindow"), { ssr: false });
 import Contacts from "./Contacts";
+import Experience from "./Experience";
 const Dock = dynamic(() => import("./Dock"), { ssr: false });
 import Projects from "./Projects";
 import Resume from "./Resume";
@@ -27,6 +28,9 @@ export default function Desktop() {
         <main id="desktop-area" className="relative flex-1 overflow-hidden">
           <AppWindow id="about" title="About Me" bp={bp}>
             <About />
+          </AppWindow>
+          <AppWindow id="experience" title="Experience" bp={bp}>
+            <Experience />
           </AppWindow>
           <AppWindow id="projects" title="Projects" bp={bp}>
             <Projects />

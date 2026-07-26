@@ -1,6 +1,8 @@
 "use client";
 import { useLayoutEffect } from "react";
 import { experiences, profile } from "@/content/profile";
+import { useUI } from "@/store/ui";
+import { useEffect } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import About from "./About";
 import AppWindow from "./AppWindow";
@@ -18,6 +20,11 @@ const previousExperience = experiences.find(
 
 export default function Desktop() {
   const bp = useBreakpoint();
+  const hydrateWindowLayouts = useUI((state) => state.hydrateWindowLayouts);
+
+  useEffect(() => {
+    hydrateWindowLayouts();
+  }, [hydrateWindowLayouts]);
 
   useLayoutEffect(() => {
     document.documentElement.dataset.portfolioReady = "true";

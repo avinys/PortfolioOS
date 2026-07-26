@@ -2,13 +2,13 @@
 
 import { Download, ExternalLink, Printer } from "lucide-react";
 import React from "react";
+import { experiences, profile } from "@/content/profile";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 
 const PDF_URL = "/resume/Arvydas-Vingis-CV.pdf";
 
 export default function Resume() {
   const bp = useBreakpoint();
-  console.log(bp);
 
   const canEmbed =
     bp === "desktop" &&
@@ -48,13 +48,25 @@ export default function Resume() {
       {/* Header summary */}
       <div className="bg-surface border-accent-200/70 rounded-xl border px-4 py-3 shadow-sm backdrop-blur-sm">
         <h2 className="text-fg text-lg font-semibold">
-          Arvydas Vingis — Frontend / Full-Stack Developer
+          {profile.name} — {profile.headline}
         </h2>
         <p className="text-fg-muted text-sm">
-          React + TypeScript, Next.js, .NET APIs. I like clean architecture,
-          accessible UI, and shipping solutions, creating real value.
+          {profile.introduction} Interested in frontend architecture,
+          observability, and AI-assisted software engineering.
         </p>
       </div>
+      {/* Experience */}
+      <Section title="Experience">
+        {experiences.map((experience) => (
+          <Experience
+            key={experience.company + experience.role}
+            company={experience.company}
+            role={experience.role}
+            period={experience.period}
+            bullets={experience.highlights}
+          />
+        ))}
+      </Section>
       {/* Education */}
       <Section title="Education">
         <div className="text-fg flex items-baseline justify-between text-sm">
@@ -62,7 +74,7 @@ export default function Resume() {
             <strong>Bachelor of Software Systems</strong>, Kaunas University of
             Technology
           </span>
-          <span className="text-fg-muted text-xs">2022 – Present · Kaunas</span>
+          <span className="text-fg-muted text-xs">2022 – 2026 · Kaunas</span>
         </div>
         <ul className="text-fg list-disc pl-5 text-sm">
           <li>
@@ -71,7 +83,7 @@ export default function Resume() {
           </li>
           <li>
             Erasmus exchange, University of Bologna (Spring 2025) —
-            international teamwork
+            international teamwork, public speaking, usability, management
           </li>
         </ul>
       </Section>
@@ -83,18 +95,36 @@ export default function Resume() {
             items={["TypeScript", "JavaScript", "C#", "SQL"]}
           />
           <Card
-            title="Frameworks / Libraries"
-            items={["React", "Next.js", "Tailwind", ".NET 8", "EF Core"]}
+            title="Web Engineering"
+            items={[
+              "React",
+              "Next.js",
+              "Frontend architecture",
+              "Modularization",
+              "Service extraction",
+            ]}
           />
           <Card
-            title="Tools / Platforms"
+            title="Observability"
+            items={["Prometheus", "Grafana", "SLOs"]}
+          />
+          <Card
+            title="Metadata"
             items={[
-              "Git",
-              "Ubuntu",
-              "Nginx",
-              "systemd",
-              "MySQL",
-              "Docker (basics)",
+              "Metadata modeling",
+              "SEMIC vocabularies",
+              "Semantic interoperability",
+            ]}
+          />
+          <Card
+            title="Engineering Interests & AI"
+            items={[
+              "AI-assisted software engineering",
+              "Coding agents",
+              "Agentic workflows",
+              "Harness engineering",
+              "Loop engineering",
+              "Reusable agent skills",
             ]}
           />
         </div>
@@ -220,24 +250,33 @@ function Card({ title, items }: { title: string; items: string[] }) {
   );
 }
 
-// function Grid({ two, children }: { two?: boolean; children: React.ReactNode }) {
-//   return (
-//     <div className={`grid gap-3 ${two ? "sm:grid-cols-2" : "grid-cols-1"}`}>
-//       {children}
-//     </div>
-//   );
-// }
-
-// function Line({ children }: { children: React.ReactNode }) {
-//   return (
-//     <div className="flex items-baseline justify-between text-sm text-slate-800">
-//       {children}
-//     </div>
-//   );
-// }
-// function Right({ children }: { children: React.ReactNode }) {
-//   return <span className="text-xs text-slate-500">{children}</span>;
-// }
+function Experience({
+  company,
+  role,
+  period,
+  bullets,
+}: {
+  company: string;
+  role: string;
+  period: string;
+  bullets: string[];
+}) {
+  return (
+    <div className="border-accent-200/60 rounded-lg border px-3 py-2 shadow-sm">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h4 className="text-fg text-sm font-semibold">
+          {company} — {role}
+        </h4>
+        <span className="text-fg-muted text-xs">{period}</span>
+      </div>
+      <ul className="text-fg mt-2 list-disc pl-5 text-sm">
+        {bullets.map((bullet) => (
+          <li key={bullet}>{bullet}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function Project({
   title,

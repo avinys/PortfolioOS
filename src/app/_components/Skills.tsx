@@ -1,24 +1,22 @@
+import { skillGroups } from "@/content/portfolio";
+
 function Skills() {
   return (
     <div className="grid grid-cols-1 gap-4 px-6 py-4 sm:grid-cols-2">
-      <SkillGroup
-        title="Frontend"
-        items={["React", "TypeScript", "Next.js", "Vite", "Tailwind"]}
-      />
-      <SkillGroup
-        title="Backend"
-        items={[".NET 8", "EF Core", "REST", "JWT Auth"]}
-      />
-      <SkillGroup
-        title="DevOps"
-        items={["Ubuntu", "Nginx", "systemd", "MySQL"]}
-      />
-      <SkillGroup title="Tools" items={["Git", "GitHub", "CI basics"]} />
+      {skillGroups.map((group) => (
+        <SkillGroup key={group.title} title={group.title} items={group.items} />
+      ))}
     </div>
   );
 }
 
-function SkillGroup({ title, items }: { title: string; items: string[] }) {
+function SkillGroup({
+  title,
+  items,
+}: {
+  title: string;
+  items: readonly string[];
+}) {
   return (
     <div className="border-accent-200/70 bg-surface hover:border-accent-300 rounded-xl border px-4 py-3 shadow-sm backdrop-blur-sm transition hover:shadow-md">
       <h4 className="text-md text-foreground text-center font-semibold">

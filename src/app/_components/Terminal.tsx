@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import "@xterm/xterm/css/xterm.css";
 import { AppId, useUI } from "@/store/ui";
 import { projects } from "@/content/projects";
+import { profile } from "@/content/profile";
 type XTerm = import("@xterm/xterm").Terminal;
 type FitAddon = import("@xterm/addon-fit").FitAddon;
 
@@ -11,7 +12,7 @@ const PROMPT = "$ ";
 
 export default function TerminalPane() {
   const hostRef = useRef<HTMLDivElement>(null);
-  const { open } = useUI();
+  const { close, openOrFocus } = useUI();
 
   useEffect(() => {
     let alive = true;
@@ -21,7 +22,7 @@ export default function TerminalPane() {
       const host = hostRef.current;
       if (!host) return;
 
-      const setup = await setupTerminal(host, open, alive);
+      const setup = await setupTerminal(host, { close, openOrFocus }, alive);
       if (!alive) {
         setup.dispose();
         return;
@@ -34,7 +35,7 @@ export default function TerminalPane() {
       alive = false;
       dispose?.();
     };
-  }, [open]);
+  }, [close, openOrFocus]);
 
   return (
     <div
@@ -59,7 +60,10 @@ function renderLine(term: XTerm, buffer: string, cursor: number) {
 function handleCommand(
   term: XTerm,
   cmd: string,
-  api: { open: (id: AppId) => void },
+  api: {
+    close: (id: AppId) => void;
+    openOrFocus: (id: AppId) => boolean;
+  },
 ) {
   if (!cmd) return;
   const [name, ...args] = cmd.split(" ");
@@ -72,7 +76,7 @@ function handleCommand(
           "whoami               Short bio",
           "skills               List skills",
           "projects             List projects",
-          "open <about|projects|skills|contact>  Open app",
+          "open <about|experience|projects|skills|contacts>  Open app",
           "email                Copy email to clipboard",
           "clear                Clear terminal",
         ].join("\r\n"),
@@ -81,13 +85,13 @@ function handleCommand(
     case "whoami":
       writeLine(
         term,
-        "Arvydas — Front-end / Full-stack dev. React+TS, .NET APIs, accessible UI. Entry-level roles welcome.",
+        `${profile.name} — ${profile.headline}. ${profile.introduction}`,
       );
       break;
     case "skills":
       writeLine(
         term,
-        "- Frontend: React, TS, Vite, Next, Tailwind\n- Backend: .NET 8, EF Core, MySQL\n- DevOps: Ubuntu, Nginx, systemd",
+        "- Web engineering: React, TypeScript, Next.js\n- Architecture: frontend modularization, service extraction\n- Observability: Prometheus metrics, Grafana dashboards\n- Interoperability: metadata modeling, SEMIC vocabularies\n- Interests: AI-assisted software engineering, coding agents, agentic workflows, harness and loop engineering",
       );
       break;
     case "projects":
@@ -96,9 +100,19 @@ function handleCommand(
       break;
     case "open": {
       const target = args[0] as AppId;
-      if (["about", "projects", "skills", "contact"].includes(target))
-        api.open(target);
-      else writeLine(term, "Usage: open about|projects|skills|contact");
+      if (
+        ["about", "experience", "projects", "skills", "contacts"].includes(
+          target,
+        )
+      ) {
+        const wasOpen = api.openOrFocus(target);
+        if (wasOpen) writeLine(term, `Window already open: ${target}`);
+      } else {
+        writeLine(
+          term,
+          "Usage: open about|experience|projects|skills|contacts",
+        );
+      }
       break;
     }
     case "email":
@@ -111,7 +125,7 @@ function handleCommand(
       prompt(term);
       break;
     case "exit":
-      api.open("terminal");
+      api.close("terminal");
       break;
     default:
       writeLine(term, `command not found: ${name}`);
@@ -120,7 +134,10 @@ function handleCommand(
 
 async function setupTerminal(
   host: HTMLDivElement,
-  open: (id: AppId) => void,
+  api: {
+    close: (id: AppId) => void;
+    openOrFocus: (id: AppId) => boolean;
+  },
   alive: boolean,
 ) {
   const { Terminal } = await import("@xterm/xterm");
@@ -250,7 +267,7 @@ async function setupTerminal(
       if (command && history[history.length - 1] !== command)
         history.push(command);
       histIndex = -1;
-      handleCommand(term, command, { open });
+      handleCommand(term, command, api);
       buffer = "";
       cursor = 0;
       prompt(term);

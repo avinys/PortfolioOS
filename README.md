@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio OS
 
-## Getting Started
+[arvydasvingis.com](https://arvydasvingis.com) is Arvydas Vingis's
+desktop-inspired portfolio. It presents professional experience, skills,
+projects, contact details, and a downloadable resume through draggable and
+resizable application windows.
 
-First, run the development server:
+## How it works
+
+- Next.js and React render the portfolio as a single-page desktop interface.
+- The dock and XTerm.js terminal open and focus the About, Experience,
+  Projects, Skills, Contacts, Terminal, and Resume windows.
+- Progressive enhancement provides the complete portfolio as a readable,
+  semantic document when JavaScript is unavailable.
+- Zustand manages window visibility, position, size, and stacking order.
+- Files in `src/content/` keep profile, project, skill, and contact information
+  separate from the presentation components.
+- Tailwind CSS, React RND, and next-themes provide the layout, window behavior,
+  and light/dark themes.
+
+## SEO and deployment
+
+The site is generated as a static export for deployment behind Nginx. Next.js
+metadata, JSON-LD person data, `sitemap.xml`, and `robots.txt` are included in
+the generated output so crawlers receive the portfolio content and SEO data in
+the initial HTML response.
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000). Use `npm run lint` for
+linting and `npm run build` to create the static site in `out/`.

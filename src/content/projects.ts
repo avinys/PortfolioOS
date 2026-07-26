@@ -50,13 +50,13 @@ export const projects: Project[] = [
     slug: "tournament",
     title: "Karate Tournament Bracket",
     summary:
-      "Node.js + Express app for managing traditional karate do tournaments. Supports kumite single-elimination, kata double-elimination brackets, and kata points mode. V1 version archived.",
+      "Node.js + Express app for managing traditional karate-do tournaments. Supports kumite single-elimination, kata double-elimination brackets, and kata points mode. Version 1 is archived.",
     stack: ["Node.js", "Express", "EJS", "JavaScript", "CSS"],
     highlights: [
       "Bracket visualization, next-up feature, and results tracking",
       "Tested and successfully used in real club tournaments",
-      "Improved administrative efficiency by ~60%, reduced paper usage by ~90%",
-      "Supports single and double elimination brackets with alternating match selection, and points-based scoring",
+      "Improved administrative efficiency by ~60% and reduced paper usage by ~90%",
+      "Supports single- and double-elimination brackets with alternating match selection and points-based scoring",
     ],
     files: {
       webm: "/media/tournament/tournament.webm",
@@ -75,13 +75,13 @@ export const projects: Project[] = [
     slug: "portfolio",
     title: "Portfolio-OS (this website)",
     summary:
-      "Simplified Desktop-OS style portfolio website, made with Next.js and Tailwind.",
+      "Simplified desktop OS-style portfolio website built with Next.js and Tailwind CSS.",
     stack: ["JavaScript", "React", "Next.js", "Tailwind CSS"],
     highlights: [
-      "Draggable, resizable app windows and custom dock navigation.",
-      "Interactive terminal built with XTerm.js, supporting commands, history, opening windows.",
-      "Dark/Light theme toggle and Lite mode for lighter resources",
-      "Deployed as a static Next.js export on Ubuntu server",
+      "Draggable, resizable app windows and custom dock navigation",
+      "Interactive terminal built with XTerm.js, supporting commands, history, and window controls",
+      "Dark/light theme toggle and lite mode for reduced resource usage",
+      "Deployed as a static Next.js export on an Ubuntu server",
     ],
     files: {
       webm: undefined,
@@ -100,19 +100,19 @@ export const projects: Project[] = [
     slug: "wild-oasis",
     title: "The Wild Oasis",
     summary:
-      "Luxury cabins hotel administration system. Allows changing the cabins information, checking-in guests, changing main settings for booking. Project I made during React course.",
+      "Luxury cabin administration system for managing cabin information, checking in guests, and configuring booking settings. Built during a React course.",
     stack: [
       "React",
-      "Tanstack Query",
+      "TanStack Query",
       "Styled components",
       "React Router",
       "React Hook Form",
     ],
     highlights: [
       "Supabase authentication and authorization",
-      "Full CRUD for cabins, bookings and guests.",
-      "Reusable styled components, notifications with React Hot Toast, form validation with Ract Hook Form.",
-      "Dashboard with KPIs and charts (Recharts), Tanstack Query caching.",
+      "Full CRUD for cabins, bookings, and guests",
+      "Reusable styled components, React Hot Toast notifications, and form validation with React Hook Form",
+      "Dashboard with KPIs and Recharts visualizations, with TanStack Query caching",
     ],
     files: {
       webm: "/media/wild-oasis/wild-oasis.webm",
@@ -132,11 +132,11 @@ export const projects: Project[] = [
     slug: "wild-oasis-client",
     title: "The Wild Oasis (client side)",
     summary:
-      "Luxury cabins hotel website for guests. Supports viewing cabins and creating, updating, managing bookings witha personal account area. Project I made during React course.",
+      "Luxury cabin website where guests can view cabins and create, update, and manage bookings through a personal account area. Built during a React course.",
     stack: [
       "React",
       "Next.js",
-      "Tanstack Query",
+      "TanStack Query",
       "Tailwind CSS",
       "NextAuth v5",
       "React Day Picker",
@@ -144,8 +144,8 @@ export const projects: Project[] = [
     highlights: [
       "Google Sign-In integration with NextAuth v5",
       "Supabase integration for guests, cabins, and bookings with server actions",
-      "Interactive date range picker with booked-date blackout, capacity checks and price calculation",
-      "Guest area to view & edit resservations and update profile info",
+      "Interactive date range picker with booked-date blackout, capacity checks, and price calculation",
+      "Guest area for viewing and editing reservations and updating profile information",
     ],
     files: {
       webm: "/media/wild-oasis-client/wild-oasis-client.webm",
@@ -164,7 +164,7 @@ export const projects: Project[] = [
     slug: "university-website-ai-assistant",
     title: "University Website AI Assistant",
     summary:
-      "AI assistant in shape of a chatbot to help students navigate complex university websites. Designed for university project, uses Web Scraping, Semantic Search (SentenceTransformer MiniLM-L6-V2) and Google Gemini 2.0-flash model as AI assistant.",
+      "Chatbot-style AI assistant that helps students navigate complex university websites. Built for a university project using web scraping, semantic search (SentenceTransformer MiniLM-L6-V2), and Google Gemini 2.0 Flash.",
     stack: [
       "React",
       "Semantic Search",
@@ -175,10 +175,10 @@ export const projects: Project[] = [
       "BeautifulSoup",
     ],
     highlights: [
-      "RAG pipeline: scraper - text chunking - MiniLM-L6-V2 embeddings - Semantic search - Gemini 2.0-flash answers",
-      "Undestands student intents via keyword similarity for Gemini workload minimization, provides links to pages.",
-      "Allows user to select the scraping time - balancing search depth and time based on user preferences.",
-      "Interactive React interface, FastAPI backend, respecting robots.txt and caching search results.",
+      "RAG pipeline: scraping, text chunking, MiniLM-L6-V2 embeddings, semantic search, and Gemini 2.0 Flash answers",
+      "Understands student intent through keyword similarity to minimize Gemini workload and provides links to relevant pages",
+      "Lets users select the scraping duration to balance search depth and time based on their preferences",
+      "Interactive React interface and FastAPI backend that respect robots.txt and cache search results",
     ],
     files: {
       webm: undefined,

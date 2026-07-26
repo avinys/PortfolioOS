@@ -1,8 +1,6 @@
 "use client";
-import { useLayoutEffect } from "react";
-import { experiences, profile } from "@/content/profile";
+import { useEffect, useLayoutEffect } from "react";
 import { useUI } from "@/store/ui";
-import { useEffect } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import About from "./About";
 import AppWindow from "./AppWindow";
@@ -13,10 +11,6 @@ import Projects from "./Projects";
 import Resume from "./Resume";
 import Skills from "./Skills";
 import TerminalPane from "./Terminal";
-
-const previousExperience = experiences.find(
-  (experience) => !experience.current,
-);
 
 export default function Desktop() {
   const bp = useBreakpoint();
@@ -44,29 +38,6 @@ export default function Desktop() {
           alt="AV logo"
         />
       </div>
-      <header className="text-foreground absolute inset-0 -z-10 flex items-center justify-end px-[6vw]">
-        <div className="max-w-md text-right">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            {profile.name}
-          </h1>
-          <p className="mt-2 text-lg font-medium">{profile.headline}</p>
-          <p className="mt-3 text-sm leading-6">{profile.introduction}</p>
-          {previousExperience && (
-            <p className="mt-3 text-sm leading-6">
-              Previously {previousExperience.role} at{" "}
-              {previousExperience.company}
-              {" ("}
-              {previousExperience.period}
-              {"). "}
-              {previousExperience.summary} {previousExperience.highlights[2]}
-            </p>
-          )}
-          <p className="mt-3 text-sm leading-6">
-            Interested in AI-assisted engineering, coding agents, harness
-            engineering, and loop engineering.
-          </p>
-        </div>
-      </header>
       <div className="flex h-dvh w-screen flex-col overflow-hidden">
         <main id="desktop-area" className="relative flex-1 overflow-hidden">
           <AppWindow id="about" title="About Me" bp={bp}>

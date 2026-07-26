@@ -143,6 +143,28 @@ body {
   color: var(--fg);
 }
 
+/* The readable document remains visible until the desktop mounts successfully. */
+.semantic-portfolio {
+  display: block;
+}
+
+.interactive-portfolio {
+  display: none;
+}
+
+html[data-portfolio-ready="true"] .semantic-portfolio {
+  display: none;
+}
+
+html[data-portfolio-ready="true"] .interactive-portfolio {
+  display: block;
+}
+
+.semantic-document {
+  min-height: 100%;
+  background: linear-gradient(to right, var(--bg-start), var(--bg-end));
+}
+
 /* -----------------------------
    Component alignments with your current classes
    (reference notes so tokens match your JSX)

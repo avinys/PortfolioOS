@@ -1,58 +1,22 @@
+import { skillGroups } from "@/content/portfolio";
+
 function Skills() {
   return (
     <div className="grid grid-cols-1 gap-4 px-6 py-4 sm:grid-cols-2">
-      <SkillGroup
-        title="Web Engineering"
-        items={[
-          "React",
-          "TypeScript",
-          "Next.js",
-          "Accessible UI",
-          "Marketplace experiences",
-        ]}
-      />
-      <SkillGroup
-        title="Frontend Architecture"
-        items={[
-          "Modularization",
-          "Service extraction",
-          "Component architecture",
-          "UI ownership",
-        ]}
-      />
-      <SkillGroup
-        title="Observability"
-        items={["Prometheus", "Grafana", "Metrics", "Dashboards", "SLOs"]}
-      />
-      <SkillGroup
-        title="Data Interoperability"
-        items={[
-          "Metadata modeling",
-          "SEMIC vocabularies",
-          "Semantic interoperability",
-          "Data documentation",
-        ]}
-      />
-      <SkillGroup
-        title="Backend & Infrastructure"
-        items={[".NET 8", "REST APIs", "MySQL", "Ubuntu", "Nginx", "Git"]}
-      />
-      <SkillGroup
-        title="Engineering Interests & AI"
-        items={[
-          "AI-assisted software engineering",
-          "Coding agents & agentic workflows",
-          "Harness engineering",
-          "Loop engineering",
-          "Reusable agent skills",
-          "Emerging AI tools",
-        ]}
-      />
+      {skillGroups.map((group) => (
+        <SkillGroup key={group.title} title={group.title} items={group.items} />
+      ))}
     </div>
   );
 }
 
-function SkillGroup({ title, items }: { title: string; items: string[] }) {
+function SkillGroup({
+  title,
+  items,
+}: {
+  title: string;
+  items: readonly string[];
+}) {
   return (
     <div className="border-accent-200/70 bg-surface hover:border-accent-300 rounded-xl border px-4 py-3 shadow-sm backdrop-blur-sm transition hover:shadow-md">
       <h4 className="text-md text-foreground text-center font-semibold">

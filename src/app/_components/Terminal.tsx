@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import "@xterm/xterm/css/xterm.css";
 import { AppId, useUI } from "@/store/ui";
 import { projects } from "@/content/projects";
+import { profile } from "@/content/profile";
 type XTerm = import("@xterm/xterm").Terminal;
 type FitAddon = import("@xterm/addon-fit").FitAddon;
 
@@ -81,7 +82,7 @@ function handleCommand(
     case "whoami":
       writeLine(
         term,
-        "Arvydas — Front-end / Full-stack dev. React+TS, .NET APIs, accessible UI. Entry-level roles welcome.",
+        `${profile.name} — ${profile.headline}. ${profile.introduction}`,
       );
       break;
     case "skills":

@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useBreakpoint } from "../hooks/useBreakpoint";
 
 export default function Dock() {
   const { wins, open, toggleLite, lite } = useUI();
@@ -30,8 +29,8 @@ export default function Dock() {
   };
 
   return (
-    <div className="border-dock bg-dock flex h-12 w-full flex-row justify-center border px-3 py-2 pb-4 text-center backdrop-blur sm:h-20 md:h-12 lg:fixed lg:bottom-0 lg:left-1/2 lg:w-screen lg:-translate-x-1/2">
-      <div className="flex items-center gap-1 sm:gap-2">
+    <div className="border-dock bg-dock flex h-12 w-full flex-row justify-start overflow-x-auto border px-3 py-2 pb-4 text-center backdrop-blur sm:h-20 sm:justify-center md:h-12 lg:fixed lg:bottom-0 lg:left-1/2 lg:w-screen lg:-translate-x-1/2">
+      <div className="flex min-w-max items-center gap-1 sm:gap-2">
         <DockButton
           label="About"
           onClick={() => open("about")}
@@ -113,7 +112,6 @@ function DockButton({
   icon?: React.ReactNode;
   active?: boolean;
 }) {
-  const bp = useBreakpoint();
   return (
     <button
       onClick={onClick}

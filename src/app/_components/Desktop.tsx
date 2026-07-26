@@ -1,4 +1,5 @@
 "use client";
+import { experiences, profile } from "@/content/profile";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import About from "./About";
 import AppWindow from "./AppWindow";
@@ -9,6 +10,10 @@ import Projects from "./Projects";
 import Resume from "./Resume";
 import Skills from "./Skills";
 import TerminalPane from "./Terminal";
+
+const previousExperience = experiences.find(
+  (experience) => !experience.current,
+);
 
 export default function Desktop() {
   const bp = useBreakpoint();
@@ -26,18 +31,21 @@ export default function Desktop() {
       <header className="text-foreground absolute inset-0 -z-10 flex items-center justify-end px-[6vw]">
         <div className="max-w-md text-right">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Arvydas Vingis
+            {profile.name}
           </h1>
-          <p className="mt-2 text-lg font-medium">Web Engineer at Vinted</p>
+          <p className="mt-2 text-lg font-medium">{profile.headline}</p>
+          <p className="mt-3 text-sm leading-6">{profile.introduction}</p>
+          {previousExperience && (
+            <p className="mt-3 text-sm leading-6">
+              Previously {previousExperience.role} at{" "}
+              {previousExperience.company}
+              {" ("}
+              {previousExperience.period}
+              {"). "}
+              {previousExperience.summary} {previousExperience.highlights[2]}
+            </p>
+          )}
           <p className="mt-3 text-sm leading-6">
-            Building and owning core customer-facing marketplace experiences
-            across homepage, catalog, and search with React, TypeScript,
-            frontend architecture, modularization, and service extraction.
-            Implementing observability and metrics with Prometheus and Grafana.
-          </p>
-          <p className="mt-3 text-sm leading-6">
-            Previously an EY Technology Consultant working on governmental
-            metadata modeling, SEMIC vocabularies, and EU interoperability.
             Interested in AI-assisted engineering, coding agents, harness
             engineering, and loop engineering.
           </p>

@@ -1,37 +1,44 @@
+import { experiences, profile } from "@/content/profile";
 import Desktop from "./_components/Desktop";
+
+const [currentExperience, previousExperience] = experiences;
 
 const personStructuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://arvydasvingis.com/#person",
-  name: "Arvydas Vingis",
+  name: profile.name,
   url: "https://arvydasvingis.com",
   image: "https://arvydasvingis.com/av_os.png",
-  jobTitle: "Web Engineer",
+  jobTitle: currentExperience.role,
   worksFor: {
     "@type": "Organization",
-    name: "Vinted",
+    name: currentExperience.company,
     url: "https://www.vinted.com",
   },
   alumniOf: {
     "@type": "CollegeOrUniversity",
-    name: "Kaunas University of Technology",
+    name: profile.education.institution,
     url: "https://ktu.edu",
   },
   hasOccupation: [
     {
       "@type": "Occupation",
-      name: "Web Engineer",
-      description:
-        "Builds and owns core customer-facing marketplace experiences across homepage, catalog, and search at Vinted.",
+      name: currentExperience.role,
+      description: [
+        currentExperience.summary,
+        ...currentExperience.highlights,
+      ].join(" "),
       skills:
         "React, TypeScript, frontend architecture, modularization, service extraction, Prometheus, Grafana, observability",
     },
     {
       "@type": "Occupation",
-      name: "Technology Consultant",
-      description:
-        "Modeled governmental institution metadata for EU interoperability, collaborating with institution representatives and using SEMIC vocabularies.",
+      name: previousExperience.role,
+      description: [
+        previousExperience.summary,
+        ...previousExperience.highlights,
+      ].join(" "),
     },
   ],
   knowsAbout: [

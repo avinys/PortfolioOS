@@ -9,6 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: "https://arvydasvingis.com/sitemap.xml",
-    host: "https://arvydasvingis.com",
   };
 }

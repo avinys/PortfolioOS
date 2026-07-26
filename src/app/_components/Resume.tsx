@@ -74,7 +74,7 @@ export default function Resume() {
             <strong>Bachelor of Software Systems</strong>, Kaunas University of
             Technology
           </span>
-          <span className="text-fg-muted text-xs">2022 – Present · Kaunas</span>
+          <span className="text-fg-muted text-xs">2022 – 2026 · Kaunas</span>
         </div>
         <ul className="text-fg list-disc pl-5 text-sm">
           <li>
@@ -83,7 +83,7 @@ export default function Resume() {
           </li>
           <li>
             Erasmus exchange, University of Bologna (Spring 2025) —
-            international teamwork
+            international teamwork, public speaking, usability, management
           </li>
         </ul>
       </Section>
@@ -105,10 +105,12 @@ export default function Resume() {
             ]}
           />
           <Card
-            title="Observability / Data"
+            title="Observability"
+            items={["Prometheus", "Grafana", "SLOs"]}
+          />
+          <Card
+            title="Metadata"
             items={[
-              "Prometheus",
-              "Grafana",
               "Metadata modeling",
               "SEMIC vocabularies",
               "Semantic interoperability",
@@ -275,25 +277,6 @@ function Experience({
     </div>
   );
 }
-
-// function Grid({ two, children }: { two?: boolean; children: React.ReactNode }) {
-//   return (
-//     <div className={`grid gap-3 ${two ? "sm:grid-cols-2" : "grid-cols-1"}`}>
-//       {children}
-//     </div>
-//   );
-// }
-
-// function Line({ children }: { children: React.ReactNode }) {
-//   return (
-//     <div className="flex items-baseline justify-between text-sm text-slate-800">
-//       {children}
-//     </div>
-//   );
-// }
-// function Right({ children }: { children: React.ReactNode }) {
-//   return <span className="text-xs text-slate-500">{children}</span>;
-// }
 
 function Project({
   title,

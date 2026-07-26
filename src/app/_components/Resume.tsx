@@ -2,13 +2,13 @@
 
 import { Download, ExternalLink, Printer } from "lucide-react";
 import React from "react";
+import { experiences } from "@/content/profile";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 
 const PDF_URL = "/resume/Arvydas-Vingis-CV.pdf";
 
 export default function Resume() {
   const bp = useBreakpoint();
-  console.log(bp);
 
   const canEmbed =
     bp === "desktop" &&
@@ -48,13 +48,26 @@ export default function Resume() {
       {/* Header summary */}
       <div className="bg-surface border-accent-200/70 rounded-xl border px-4 py-3 shadow-sm backdrop-blur-sm">
         <h2 className="text-fg text-lg font-semibold">
-          Arvydas Vingis — Frontend / Full-Stack Developer
+          Arvydas Vingis — Web Engineer
         </h2>
         <p className="text-fg-muted text-sm">
-          React + TypeScript, Next.js, .NET APIs. I like clean architecture,
-          accessible UI, and shipping solutions, creating real value.
+          Web Engineer at Vinted building and owning core marketplace
+          experiences with React and TypeScript. Interested in frontend
+          architecture, observability, and AI-assisted software engineering.
         </p>
       </div>
+      {/* Experience */}
+      <Section title="Experience">
+        {experiences.map((experience) => (
+          <Experience
+            key={experience.company + experience.role}
+            company={experience.company}
+            role={experience.role}
+            period={experience.period}
+            bullets={experience.highlights}
+          />
+        ))}
+      </Section>
       {/* Education */}
       <Section title="Education">
         <div className="text-fg flex items-baseline justify-between text-sm">
@@ -83,18 +96,34 @@ export default function Resume() {
             items={["TypeScript", "JavaScript", "C#", "SQL"]}
           />
           <Card
-            title="Frameworks / Libraries"
-            items={["React", "Next.js", "Tailwind", ".NET 8", "EF Core"]}
+            title="Web Engineering"
+            items={[
+              "React",
+              "Next.js",
+              "Frontend architecture",
+              "Modularization",
+              "Service extraction",
+            ]}
           />
           <Card
-            title="Tools / Platforms"
+            title="Observability / Data"
             items={[
-              "Git",
-              "Ubuntu",
-              "Nginx",
-              "systemd",
-              "MySQL",
-              "Docker (basics)",
+              "Prometheus",
+              "Grafana",
+              "Metadata modeling",
+              "SEMIC vocabularies",
+              "Semantic interoperability",
+            ]}
+          />
+          <Card
+            title="Engineering Interests & AI"
+            items={[
+              "AI-assisted software engineering",
+              "Coding agents",
+              "Agentic workflows",
+              "Harness engineering",
+              "Loop engineering",
+              "Reusable agent skills",
             ]}
           />
         </div>
@@ -216,6 +245,34 @@ function Card({ title, items }: { title: string; items: string[] }) {
           </span>
         ))}
       </div>
+    </div>
+  );
+}
+
+function Experience({
+  company,
+  role,
+  period,
+  bullets,
+}: {
+  company: string;
+  role: string;
+  period: string;
+  bullets: string[];
+}) {
+  return (
+    <div className="border-accent-200/60 rounded-lg border px-3 py-2 shadow-sm">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h4 className="text-fg text-sm font-semibold">
+          {company} — {role}
+        </h4>
+        <span className="text-fg-muted text-xs">{period}</span>
+      </div>
+      <ul className="text-fg mt-2 list-disc pl-5 text-sm">
+        {bullets.map((bullet) => (
+          <li key={bullet}>{bullet}</li>
+        ))}
+      </ul>
     </div>
   );
 }

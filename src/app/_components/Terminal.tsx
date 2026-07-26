@@ -73,7 +73,7 @@ function handleCommand(
           "whoami               Short bio",
           "skills               List skills",
           "projects             List projects",
-          "open <about|projects|skills|contact>  Open app",
+          "open <about|experience|projects|skills|contacts>  Open app",
           "email                Copy email to clipboard",
           "clear                Clear terminal",
         ].join("\r\n"),
@@ -88,7 +88,7 @@ function handleCommand(
     case "skills":
       writeLine(
         term,
-        "- Frontend: React, TS, Vite, Next, Tailwind\n- Backend: .NET 8, EF Core, MySQL\n- DevOps: Ubuntu, Nginx, systemd",
+        "- Web engineering: React, TypeScript, Next.js\n- Architecture: frontend modularization, service extraction\n- Observability: Prometheus metrics, Grafana dashboards\n- Interoperability: metadata modeling, SEMIC vocabularies\n- Interests: AI-assisted software engineering, coding agents, agentic workflows, harness and loop engineering",
       );
       break;
     case "projects":
@@ -97,9 +97,17 @@ function handleCommand(
       break;
     case "open": {
       const target = args[0] as AppId;
-      if (["about", "projects", "skills", "contact"].includes(target))
+      if (
+        ["about", "experience", "projects", "skills", "contacts"].includes(
+          target,
+        )
+      )
         api.open(target);
-      else writeLine(term, "Usage: open about|projects|skills|contact");
+      else
+        writeLine(
+          term,
+          "Usage: open about|experience|projects|skills|contacts",
+        );
       break;
     }
     case "email":
